@@ -13,7 +13,7 @@ export const fetchDeckError = (error) => {
 };
 
 export const fetchNewDeck = () => (dispatch) => {
-  return fetch("https://deckofcardsapi.com/api/deck/new/foo")
+  return fetch("https://deckofcardsapi.com/api/deck/new/shuffle")
     .then((response) => {
       if (response.status !== 200) {
         throw new Error("Unsuccessful request to deckofcardsapi.com");
