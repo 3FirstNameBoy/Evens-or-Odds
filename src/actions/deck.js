@@ -1,4 +1,4 @@
-import { DECK } from "./types";
+import { DECK, DECK_DRAW } from "./types";
 
 export const fetchDeckSuccess = (deckJson) => {
   const { remaining, deck_id } = deckJson;
@@ -22,4 +22,24 @@ export const fetchNewDeck = () => (dispatch) => {
     })
     .then((json) => dispatch(fetchDeckSuccess(json)))
     .catch((error) => dispatch(fetchDeckError(error)));
+};
+
+export const fetchDrawCard = (deck_id) => (dispatch) => {
+  return fetch(`https://deckofcardsapi.com/api/deck/${deck_id}/draw`)
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("Unsuccessful request to deckofcardsapi.com");
+      }
+      return response.json();
+    })
+    .then((json) => {
+      dispatch({
+        type: DECK_DRAW.FETCH_SUCCESS,
+        cards: json.cards,
+        remaining: json.remaning,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: DECK_DRAW.FETCH_ERROR, message: error.message })
+    );
 };
