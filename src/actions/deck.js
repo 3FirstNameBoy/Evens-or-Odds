@@ -36,7 +36,7 @@ export const fetchDrawCard = (deck_id) => (dispatch) => {
       dispatch({
         type: DECK_DRAW.FETCH_SUCCESS,
         cards: json.cards,
-        remaining: json.remaning,
+        remaining: json.remaining,
       });
     })
     .catch((error) =>
