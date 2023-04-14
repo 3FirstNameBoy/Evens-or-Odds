@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 const Card = ({ cards }) => {
+  if (!cards[0]) return null;
+
   const { value, suit, image } = cards[0];
 
   return (
@@ -13,4 +15,5 @@ const Card = ({ cards }) => {
     </div>
   );
 };
-export default connect()(Card);
+
+export default connect(({ deck: { cards } }) => ({ cards }))(Card);
